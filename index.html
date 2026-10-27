@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKI Kelas 9 - Modul Walisongo & Sunan Gresik | MTs Al-Hidayah</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Inter & Scheherazade New for Arabic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#0B1E36',
+              navy: '#0F2C59',
+              primary: '#004B87',
+              accent: '#00A8E8',
+              sky: '#E0F2FE',
+              gold: '#D97706',
+              softBg: '#F4F7FA'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            arabic: ['Scheherazade New', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Apple Motion Styles & Slide Framework */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0B1E36;
+      color: #1E293B;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    /* Slide Stage Container */
+    .slide-stage {
+      perspective: 1000px;
+    }
+
+    /* Modern Slide Canvas with Geometric Shape Background */
+    .slide-card {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.96) translateY(20px);
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      background: #FFFFFF;
+      overflow: hidden;
+    }
+
+    .slide-card.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1) translateY(0);
+      z-index: 10;
+    }
+
+    /* Dynamic Diagonal Background Shapes ala Corporate Presentation */
+    .geo-shape-1 {
+      position: absolute;
+      top: -10%;
+      right: -10%;
+      width: 55%;
+      height: 120%;
+      background: linear-gradient(135deg, #0F2C59 0%, #004B87 100%);
+      clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%);
+      z-index: 1;
+    }
+
+    .geo-shape-2 {
+      position: absolute;
+      top: -15%;
+      right: 35%;
+      width: 15%;
+      height: 130%;
+      background: linear-gradient(135deg, rgba(0, 168, 232, 0.8) 0%, rgba(14, 165, 233, 0.4) 100%);
+      clip-path: polygon(50% 0, 100% 0, 50% 100%, 0% 100%);
+      z-index: 1;
+    }
+
+    .geo-shape-light {
+      position: absolute;
+      bottom: -10%;
+      left: -5%;
+      width: 40%;
+      height: 60%;
+      background: #E0F2FE;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.6;
+      z-index: 0;
+    }
+
+    /* Apple-style Motion Keyframe Staggers */
+    .animate-item {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .slide-card.active .animate-item {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger delays for children */
+    .slide-card.active .delay-1 { transition-delay: 0.1s; }
+    .slide-card.active .delay-2 { transition-delay: 0.2s; }
+    .slide-card.active .delay-3 { transition-delay: 0.3s; }
+    .slide-card.active .delay-4 { transition-delay: 0.4s; }
+    .slide-card.active .delay-5 { transition-delay: 0.5s; }
+
+    /* Interactive Clickable Word / Tag Styling */
+    .word-click {
+      display: inline-block;
+      cursor: pointer;
+      color: #004B87;
+      font-weight: 600;
+      border-bottom: 2px dashed #00A8E8;
+      padding: 0 4px;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+    .word-click:hover {
+      background-color: #E0F2FE;
+      color: #0F2C59;
+      transform: translateY(-1px);
+    }
+
+    /* Custom Glassmorphism Modal */
+    .glass-modal {
+      background: rgba(15, 44, 89, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(156, 163, 175, 0.5);
+      border-radius: 10px;
+    }
+
+    /* Avatar Frame Circle from Template Image */
+    .avatar-circle-frame {
+      position: relative;
+      border-radius: 50%;
+      border: 8px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 20px 30px -10px rgba(15, 44, 89, 0.3);
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body class="h-screen w-screen flex flex-col justify-between p-2 sm:p-4 md:p-6 bg-brand-dark">
+
+  <!-- TOP HEADER / BRANDING BAR -->
+  <header class="w-full max-w-7xl mx-auto flex justify-between items-center bg-brand-navy/90 text-white px-5 py-3 rounded-2xl backdrop-blur-md shadow-lg border border-white/10 z-50">
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-accent to-blue-500 flex items-center justify-center font-bold text-lg shadow-md">
+        <i class="fa-solid font-bold">SKI</i>
+      </div>
+      <div>
+        <h1 class="text-sm md:text-base font-bold tracking-wide">MTs AL-HIDAYAH BOJONG NANGKA</h1>
+        <p class="text-xs text-brand-sky/80">Kurikulum Berbasis Cinta • SKI Kelas IX</p>
+      </div>
+    </div>
+    
+    <!-- Center Info Badge -->
+    <div class="hidden md:flex items-center space-x-2 bg-white/10 px-4 py-1.5 rounded-full border border-white/10 text-xs text-brand-sky">
+      <i class="fa-solid fa-book-open text-brand-accent"></i>
+      <span>Bab 1: Sejarah Walisongo (Pertemuan 1)</span>
+    </div>
+
+    <!-- Slide Index & Help -->
+    <div class="flex items-center space-x-3">
+      <span class="text-xs font-semibold px-3 py-1 bg-brand-accent/20 border border-brand-accent/40 rounded-full text-brand-sky">
+        Slide <span id="current-slide-num">1</span> / 15
+      </span>
+      <button onclick="toggleSlideOverview()" class="p-2 hover:bg-white/10 rounded-lg text-brand-sky transition" title="Daftar Slide">
+        <i class="fa-solid fa-border-all text-sm"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN SLIDE STAGE -->
+  <main class="relative w-full max-w-7xl mx-auto flex-1 my-3 rounded-3xl overflow-hidden shadow-2xl border border-white/20 slide-stage bg-white">
+
+    <!-- SLIDE 1: COVER -->
+    <div class="slide-card active p-6 md:p-12 flex flex-col justify-between" id="slide-1">
+      <div class="geo-shape-1"></div>
+      <div class="geo-shape-2"></div>
+      <div class="geo-shape-light"></div>
+
+      <!-- Top Header Area -->
+      <div class="relative z-10 flex justify-between items-start">
+        <div class="inline-flex items-center space-x-2 bg-brand-navy text-white text-xs font-semibold px-4 py-2 rounded-full shadow-md">
+          <i class="fa-solid fa-heart text-rose-400"></i>
+          <span>MODUL AJAR KURIKULUM BERBASIS CINTA</span>
+        </div>
+        <div class="relative z-10 text-right text-white hidden sm:block">
+          <p class="text-sm font-semibold">Tahun Ajaran 2026/2027</p>
+          <p class="text-xs text-brand-sky/80">Fase D • Semester Ganjil</p>
+        </div>
+      </div>
+
+      <!-- Main Title Content Grid -->
+      <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center my-auto">
+        <div class="lg:col-span-7 space-y-4">
+          <div class="animate-item delay-1 inline-block bg-brand-sky text-brand-primary font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-md">
+            Mata Pelajaran Sejarah Kebudayaan Islam
+          </div>
+          <h1 class="animate-item delay-2 text-3xl sm:text-5xl lg:text-6xl font-extrabold text-brand-navy leading-tight">
+            SEJARAH <br><span class="text-brand-primary">WALISONGO</span>
+          </h1>
+          <p class="animate-item delay-3 text-sm md:text-lg text-slate-600 max-w-xl font-medium">
+            Pertemuan 1: Pengantar Kehadiran Walisongo & Pelopor Dakwah <span class="word-click" onclick="openWordModal('Sunan Gresik')">Sunan Gresik</span> (<span class="word-click" onclick="openWordModal('Maulana Malik Ibrahim')">Maulana Malik Ibrahim</span>)
+          </p>
+
+          <div class="animate-item delay-4 flex flex-wrap gap-4 pt-4">
+            <button onclick="nextSlide()" class="px-8 py-4 bg-brand-navy hover:bg-brand-primary text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl transition transform hover:-translate-y-0.5 flex items-center space-x-3">
+              <span>Mulai Mulok Berbasis Cinta</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+            <div class="flex items-center space-x-3 px-4 py-2 bg-slate-100 rounded-2xl text-slate-700 text-xs font-semibold">
+              <i class="fa-solid fa-user-circle text-brand-primary text-lg"></i>
+              <div>
+                <p class="text-slate-500">Penyusun / Guru:</p>
+                <p class="font-bold text-brand-navy">RENDI, S.Pd.I</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Geometric Graphic Frame (Inspired by reference template image) -->
+        <div class="lg:col-span-5 relative flex justify-center items-center">
+          <div class="w-64 h-64 sm:w-80 sm:h-80 avatar-circle-frame bg-slate-100 flex items-center justify-center p-4">
+            <div class="w-full h-full rounded-full bg-gradient-to-br from-brand-navy to-brand-primary flex flex-col items-center justify-center text-white text-center p-6 shadow-inner">
+              <i class="fa-solid fa-kaaba text-5xl mb-3 text-brand-accent"></i>
+              <h3 class="text-xl font-bold">Rahmatan Lil 'Alamin</h3>
+              <p class="text-xs text-brand-sky mt-2">Dakwah Santun, Moderat, Adaptif & Penuh Kasih Sayang</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Bar Footer -->
+      <div class="relative z-10 flex justify-between items-center border-t border-slate-200 pt-4 text-xs text-slate-500">
+        <div><i class="fa-solid fa-location-dot text-brand-primary mr-1"></i> MTs Al-Hidayah Bojong Nangka</div>
+        <div>Alokasi Waktu: 2 x 40 Menit</div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: IDENTITAS MODUL & KURIKULUM BERBASIS CINTA -->
+    <div class="slide-card p-6 md:p-10 flex flex-col justify-between" id="slide-2">
+      <div class="geo-shape-1 opacity-20"></div>
+      
+      <div class="relative z-10">
+        <div class="flex items-center space-x-3 mb-4">
+          <div class="w-3 h-8 bg-brand-accent rounded-full"></div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-brand-navy">Identitas Modul & Core Values</h2>
+        </div>
+        <p class="text-slate-600 text-sm">Landasan Kurikulum Merdeka & Pendekatan Berbasis Cinta Kasih.</p>
+      </div>
+
+      <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 my-auto">
+        <!-- Info Card 1 -->
+        <div class="animate-item delay-1 bg-slate-50 p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+          <div class="w-10 h-10 rounded-xl bg-brand-primary/10 text-brand-primary flex items-center justify-center mb-3 text-lg font-bold">
+            <i class="fa-solid fa-school"></i>
+          </div>
+          <h4 class="font-bold text-brand-navy mb-1">Satuan Pendidikan</h4>
+          <p class="text-xs text-slate-600 font-semibold">MTs Al-Hidayah Bojong Nangka</p>
+          <p class="text-xs text-slate-500 mt-2">Kelas IX / Fase D / Semester 1</p>
+        </div>
+
+        <!-- Info Card 2 -->
+        <div class="animate-item delay-2 bg-slate-50 p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+          <div class="w-10 h-10 rounded-xl bg-brand-accent/10 text-brand-accent flex items-center justify-center mb-3 text-lg font-bold">
+            <i class="fa-solid fa-clock"></i>
+          </div>
+          <h4 class="font-bold text-brand-navy mb-1">Alokasi Waktu</h4>
+          <p class="text-xs text-slate-600 font-semibold">2 JP (2 x 40 Menit)</p>
+          <p class="text-xs text-slate-500 mt-2">Model: Discovery & PBL</p>
+        </div>
+
+        <!-- Info Card 3 -->
+        <div class="animate-item delay-3 bg-brand-navy text-white p-5 rounded-2xl shadow-md border border-white/10">
+          <div class="w-10 h-10 rounded-xl bg-white/10 text-brand-sky flex items-center justify-center mb-3 text-lg font-bold">
+            <i class="fa-solid fa-hands-holding-child"></i>
+          </div>
+          <h4 class="font-bold text-white mb-1">Profil Pelajar Pancasila</h4>
+          <ul class="text-xs text-brand-sky/90 space-y-1 list-disc list-inside">
+            <li>Beriman & Berakhlaq Mulia</li>
+            <li>Bernalar Kritis</li>
+            <li>Gotong Royong & Kebinekaan</li>
+          </ul>
+        </div>
+
+        <!-- Info Card 4 -->
+        <div class="animate-item delay-4 bg-gradient-to-br from-brand-primary to-brand-navy text-white p-5 rounded-2xl shadow-md">
+          <div class="w-10 h-10 rounded-xl bg-white/20 text-yellow-300 flex items-center justify-center mb-3 text-lg font-bold">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+          <h4 class="font-bold text-white mb-1">Pelajar Rahmatan Lil 'Alamin</h4>
+          <div class="flex flex-wrap gap-1 mt-2">
+            <span class="word-click bg-white/20 text-white text-[11px] px-2 py-0.5 rounded" onclick="openWordModal('Taaddub')">Ta'addub</span>
+            <span class="word-click bg-white/20 text-white text-[11px] px-2 py-0.5 rounded" onclick="openWordModal('Tawassuth')">Tawassuth</span>
+            <span class="word-click bg-white/20 text-white text-[11px] px-2 py-0.5 rounded" onclick="openWordModal('Tasamuh')">Tasamuh</span>
+            <span class="word-click bg-white/20 text-white text-[11px] px-2 py-0.5 rounded" onclick="openWordModal('Tathawwur')">Tathawwur</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative z-10 bg-rose-50 border border-rose-200 p-4 rounded-2xl flex items-center space-x-4">
+        <div class="p-3 bg-rose-500 text-white rounded-xl text-xl">
+          <i class="fa-solid fa-quote-left"></i>
+        </div>
+        <p class="text-xs md:text-sm text-rose-900 font-medium">
+          <strong>Prinsip Kurikulum Berbasis Cinta:</strong> Pembelajaran Sejarah Islam disampaikan dengan menumbuhkan rasa kasih sayang kepada seluruh makhluk, menghargai keberagaman budaya Nusantara, serta mengedepankan keteladanan tanpa pemaksaan.
+        </p>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: APERSEPTASI & PERTANYAAN PEMANTIK -->
+    <div class="slide-card p-6 md:p-10 flex flex-col justify-between" id="slide-3">
+      <div class="geo-shape-2 opacity-30"></div>
+
+      <div class="relative z-10">
+        <div class="flex items-center space-x-3 mb-2">
+          <div class="w-3 h-8 bg-brand-gold rounded-full"></div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-brand-navy">Aperseptasi & Pemantik Cinta</h2>
+        </div>
+        <p class="text-slate-600 text-sm">Mari merenungkan bagaimana Islam hadir menyapa Nusantara.</p>
+      </div>
+
+      <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 my-auto">
+        <!-- Card 1 -->
+        <div class="animate-item delay-1 bg-white p-6 rounded-2xl border-2 border-brand-sky shadow-lg hover:border-brand-accent transition flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 bg-sky-100 text-brand-primary rounded-2xl flex items-center justify-center text-xl font-bold mb-4">
+              <i class="fa-solid fa-circle-question"></i>
+            </div>
+            <h3 class="text-lg font-bold text-brand-navy mb-2">Pertanyaan Pemantik 1</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              "Mengapa dakwah <span class="word-click" onclick="openWordModal('Walisongo')">Walisongo</span> di tanah Jawa dapat diterima dengan sangat hangat dan cepat oleh masyarakat yang saat itu mayoritas beragama Hindu-Buddha?"
+            </p>
+          </div>
+          <div class="mt-4 pt-4 border-t border-slate-100 text-xs text-brand-primary font-semibold flex items-center justify-between">
+            <span>Kunci: Pendekatan Kultural & Kasih Sayang</span>
+            <i class="fa-solid fa-lightbulb"></i>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="animate-item delay-2 bg-white p-6 rounded-2xl border-2 border-brand-sky shadow-lg hover:border-brand-accent transition flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-xl font-bold mb-4">
+              <i class="fa-solid fa-handshake"></i>
+            </div>
+            <h3 class="text-lg font-bold text-brand-navy mb-2">Pertanyaan Pemantik 2</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              "Bagaimana seorang pendatang asing seperti <span class="word-click" onclick="openWordModal('Sunan Gresik')">Sunan Gresik</span> merangkul masyarakat kasta bawah di pesisir Gresik tanpa merendahkan tradisi lokal mereka?"
+            </p>
+          </div>
+          <div class="mt-4 pt-4 border-t border-slate-100 text-xs text-amber-600 font-semibold flex items-center justify-between">
+            <span>Kunci: Pelayanan Sosial & Kemanusiaan</span>
+            <i class="fa-solid fa-heart"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative z-10 bg-slate-100 p-4 rounded-2xl text-center text-xs text-slate-600 font-medium">
+        <i class="fa-solid fa-comments text-brand-primary mr-2"></i> Diskusi Singkat: Silakan sampaikan pendapatmu secara bebas sebelum kita masuk ke materi utama!
+      </div>
+    </div>
+
+    <!-- SLIDE 4: CAPAIAN & TUJUAN PEMBELAJARAN -->
+    <div class="slide-card p-6 md:p-10 flex flex-col justify-between" id="slide-4">
+      <div class="geo-shape-1"></div>
+
+      <div class="relative z-10 text-white">
+        <div class="flex items-center space-x-3 mb-2">
+          <div class="w-3 h-8 bg-brand-accent rounded-full"></div>
+          <h2 class="text-2xl sm:text-3xl font-bold">Capaian & Tujuan Pembelajaran</h2>
+        </div>
+        <p class="text-brand-sky text-sm">Target kompetensi peserta didik kelas 9 dalam modul ini.</p>
+      </div>
+
+      <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 my-auto">
+        <!-- CP Card -->
+        <div class="animate-item delay-1 bg-white/95 text-slate-800 p-6 rounded-2xl shadow-xl backdrop-blur-md">
+          <div class="flex items-center space-x-3 mb-3">
+            <span class="px-3 py-1 bg-brand-primary text-white text-xs font-bold rounded-lg">CP ELEMEN</span>
+            <h3 class="font-bold text-brand-navy">Sejarah & Biografi SKI</h3>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Peserta didik mampu menganalisis proses masuk dan berkembangnya Islam di Nusantara, khususnya peran dan <span class="word-click" onclick="openWordModal('Strategi Dakwah')">strategi dakwah</span> Walisongo yang ramah, toleran, dan adaptif terhadap kearifan lokal (budaya, sosial, ekonomi, pendidikan, dan politik).
+          </p>
+        </div>
+
+        <!-- TP Card -->
+        <div class="animate-item delay-2 bg-white/95 text-slate-800 p-6 rounded-2xl shadow-xl backdrop-blur-md space-y-3">
+          <span class="px-3 py-1 bg-brand-accent text-white text-xs font-bold rounded-lg">TUJUAN PEMBELAJARAN (TP)</span>
+          <ul class="text-xs text-slate-700 space-y-2">
+            <li class="flex items-start space-x-2">
+              <i class="fa-solid fa-circle-check text-emerald-500 mt-0.5"></i>
+              <span>Mengidentifikasi sejarah dan biografi <span class="word-click" onclick="openWordModal('Sunan Gresik')">Sunan Gresik</span> secara rinci.</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <i class="fa-solid fa-circle-check text-emerald-500 mt-0.5"></i>
+              <span>Menganalisis pendekatan dakwah perdagangan, pengobatan gratis, dan pertanian.</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <i class="fa-solid fa-circle-check text-emerald-500 mt-0.5"></i>
+              <span>Menginternalisasi nilai <span class="word-click" onclick="openWordModal('Tasamuh')">Tasamuh</span> (toleransi) dalam kehidupan modern.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="relative z-10 bg-white/10 text-white p-3 rounded-xl text-xs text-center border border-white/20">
+        Fase D • Kurikulum Merdeka Berbasis Cinta • Target Tercapai Melalui Diskusi & Refleksi Interaktif
+      </div>
+    </div>
+
+    <!-- SLIDE 5: HISTORICAL CONTEXT / PESISIR JAWA ABAD 14 -->
+    <div class="slide-card p-6 md:p-10 flex flex-col justify-between" id="slide-5">
+      <div class="geo-shape-light"></div>
+
+      <div class="relative z-10">
+        <div class="flex items-center space-x-3 mb-2">
+          <div class="w-3 h-8 bg-brand-primary rounded-full"></div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-brand-navy">Kondisi Pesisir Jawa Abad Ke-14</h2>
+        </div>
+        <p class="text-slate-600 text-sm">Konteks Sosio-Hukum dan Kedatangan Para Mubaligh.</p>
+      </div>
+
+      <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-5 my-auto">
+        <div class="animate-item delay-1 bg-slate-50 p-5 rounded-2xl border border-slate-200">
+          <div class="text-brand-primary text-2xl font-bold mb-2"><i class="fa-solid fa-landmark"></i></div>
+          <h3 class="font-bold text-brand-navy mb-2">Era Kerajaan Majapahit</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Masyarakat Jawa berada di bawah pengaruh sistem kasta Hindu-Buddha. Rakyat jelata (kasta bawah) kerap mengalami keterbatasan akses sosial dan ekonomi.
+          </p>
+        </div>
+
+        <div class="animate-item delay-2 bg-slate-50 p-5 rounded-2xl border border-slate-200">
+          <div class="text-brand-accent text-2xl font-bold mb-2"><i class="fa-solid fa-ship"></i></div>
+          <h3 class="font-bold text-brand-navy mb-2">Pelabuhan Gresik</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Gresik menjadi kota pelabuhan dagang internasional yang sangat ramai dikunjungi para pedagang dari Gujarat, Persia, Cina, dan Arab.
+          </p>
+        </div>
+
+        <div class="animate-item delay-3 bg-brand-navy text-white p-5 rounded-2xl">
+          <div class="text-brand-sky text-2xl font-bold mb-2"><i class="fa-solid fa-seedling"></i></div>
+          <h3 class="font-bold text-white mb-2">Kedatangan Pelopor</h3>
+          <p class="text-xs text-brand-sky/90 leading-relaxed">
+            <span class="word-click text-yellow-300" onclick="openWordModal('Maulana Malik Ibrahim')">Maulana Malik Ibrahim</span> mendarat di Desa Leran pada tahun 1392 M membawa misi cinta damai tanpa paksaan senjata.
+          </p>
+        </div>
+      </div>
+
+      <div class="relative z-10 bg-blue-50 p-4 rounded-2xl text-xs text-brand-primary font-medium flex items-center justify-between">
+        <span><i class="fa-solid fa-info-circle mr-2"></i> Klik nama tokoh yang bergaris putus-putus untuk melihat glosarium lengkap.</span>
+        <span class="font-bold">Tahun 1392 M</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: AYAT AL-QUR'AN & LANDASAN NILAI (QS. AN-NAHL: 125) -->
+    <div class="slide-card p-6 md:p-10 flex flex-col justify-between" id="slide-6">
+      <div class="geo-shape-1"></div>
+
+      <div class="relative z-10 text-white">
+        <div class="flex items-center space-x-3 mb-2">
+          <div class="w-3 h-8 bg-amber-400 rounded-full"></div>
+          <h2 class="text-2xl sm:text-3xl font-bold">Landasan Ayat Al-Qur'an</h2>
+        </div>
+        <p class="text-brand-sky text-sm">Prinsip Utama Dakwah Berbasis Cinta & Wisdom.</p>
+      </div>
+
+      <div class="relative z-10 bg-white/95 p-6 md:p-8 rounded-3xl shadow-2xl space-y-5 my-auto">
+        <!-- Arabic Text Block -->
+        <div class="text-right">
+          <p class="font-arabic text-2xl md:text-3xl font-bold leading-loose text-brand-navy tracking-wide">
+            ادْعُ إِلَىٰ سَبِيلِ رَبِّكَ بِالْحِكْمَةِ وَالْمَوْعِظَةِ الْحَسَنَةِ ۖ وَجَادِلْهُم بِالَّتِي هِيَ أَحْسَنُ
+          </p>
+        </div>
+
+        <!-- Transliteration -->
+        <p class="text-xs md:text-sm text-slate-500 italic border-l-4 border-brand-accent pl-4">
+          "Ud'u ilā sabīli rabbika bil-ḥikmati wal-mau'iẓatil-ḥasanati wa jādil-hum billatī hiya aḥsan..."
+        </p>
+
+        <!-- Indonesian Translation -->
+        <div class="bg-slate-50 p-4 rounded-2xl text-xs md:text-sm text-slate-700 font-medium border border-slate-200">
+          <strong>Artinya:</strong> "Serulah (manusia) kepada jalan Tuhanmu dengan <span class="word-click" onclick="openWordModal('Hikmah')">hikmah</span> dan pengajaran yang baik, dan berdebatlah dengan mereka dengan cara yang baik..." <em>(QS. An-Nahl: 125)</em>
+        </div>
+
+        <!-- Dynamic Integration with Kurikulum Berbasis Cinta -->
+        <div class="grid grid-cols-3 gap-3 text-center">
+          <div class="bg-blue-50 p-2 rounded-xl text-[11px] font-bold text-brand-primary">
+            <i class="fa-solid fa-brain block mb-1 text-base"></i> Hikmah (Bijaksana)
+          </div>
+          <div class="bg-emerald-50 p-2 rounded-xl text-[11px] font-bold text-emerald-700">
+            <i class="fa-solid fa-heart block mb-1 text-base"></i> Mau'izhah Hasanah
+          </div>
+          <div class="bg-purple-50 p-2 rounded-xl text-[11px] font-bold text-purple-700">
+            <i class="fa-solid fa-comments block mb-1 text-base"></i> Mujadalah Ahsan
+          </div>
+        </div>
+      </div>
+
+      <div class="relative z-10 text-xs text-brand-sky text-center">
+        Sunan Gresik menerapkan ayat ini secara sempurna saat berhadapan dengan masyarakat berbagai kasta.
+      </div>
+    </div>
+
+    <!-- SLIDE 7: BIOGRAFI SUNAN GRESIK (MAULANA MALIK IBRAHIM) -->
+    <div class="slide-card p-6 md:p-10 flex flex-col justify-between" id="slide-7">
+      <div class="geo-shape-2 opacity-20"></div>
+
+      <div class="relative z-10">
+        <div class="flex items-center space-x-3 mb-2">
+          <div class="w-3 h-8 bg-brand-accent rounded-full"></div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-brand-navy">Biografi Maulana Malik Ibrahim</h2>
+        </div>
+        <p class="text-slate-600 text-sm">Kakek / Pelopor Utama Dari Anggota Walisongo.</p>
+      </div>
+
+      <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center my-auto">
+        <!-- Left Timeline Cards -->
+        <div class="lg:col-span-7 space-y-3">
+          <div class="animate-item delay-1 bg-slate-50 p-4 rounded-2xl border border-slate-200 flex items-start space-x-4">
+            <div class="p-3 bg-brand-primary text-white rounded-xl font-bold text-sm">1392 M</div>
+            <div>
+              <h4 class="font-bold text-brand-navy text-sm">Kedatangan Pertama</h4>
+              <p class="text-xs text-slate-600">Tiba di Desa Leran, Gresik, Jawa Timur. Membuka jaringan komunikasi dengan masyarakat lokal secara santun.</p>
+            </div>
+          </div>
+
+          <div class="animate-item delay-2 bg-slate-50 p-4 rounded-2xl border border-slate-200 flex items-start space-x-4">
+            <div class="p-3 bg-brand-accent text-white rounded-xl font-bold text-sm">Asal</div>
+            <div>
+              <h4 class="font-bold text-brand-navy text-sm">Garis Keturunan & Asal-usul</h4>
+              <p class="text-xs text-slate-600">Berasal dari Kashan (Persia/Uzbekistan) & keturunan <span class="word-click" onclick="openWordModal('Ahlul Bait')">Ahlul Bait</span> Nabi Muhammad SAW melalui jalur Sayyidina Husain.</p>
+            </div>
+          </div>
+
+          <div class="animate-item delay-3 bg-slate-50 p-4 rounded-2xl border border-slate-200 flex items-start space-x-4">
+            <div class="p-3 bg-brand-gold text-white rounded-xl font-bold text-sm">1419 M</div>
+            <div>
+              <h4 class="font-bold text-brand-navy text-sm">Wafat & Warisan</h4>
+              <p class="text-xs text-slate-600">Wafat pada 12 Rabiul Awal 822 H (1419 M) dan dimakamkan di Gapura Wot, Gresik.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Profile Card -->
+        <div class="lg:col-span-5 animate-item delay-4 bg-gradient-to-br from-brand-navy to-brand-primary text-white p-6 rounded-3xl shadow-xl text-center">
+          <div class="w-24 h-24 mx-auto rounded-full bg-white/10 flex items-center justify-center border-4 border-white/20 mb-3 text-4xl">
+            <i class="fa-solid fa-user-astronaut text-brand-accent"></i>
+          </div>
+          <h3 class="font-bold text-xl">Kakek Bapa Walisongo</h3>
+          <p class="text-xs text-brand-sky mt-1 mb-4">Julukan: Syekh Maghribi / Kakek Bapa</p>
+          <div class="bg-white/10 p-3 rounded-xl text-xs space-y-1 text-left">
+            <p><strong>Nama Lain:</strong> Makdum Ibrahim As-Samarqandi</p>
+            <p><strong>Spesialisasi:</strong> Pendekatan Sosial & Ekonomi</p>
+            <p><strong>Gaya Bahasa:</strong> Lembut & Penuh Pengayoman</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative z-10 text-xs text-slate-500">
+        *Sunan Gresik merupakan wali tertua dalam jajaran Walisongo yang merintis jalan dakwah di Jawa.
+      </div>
+    </div>
+
+    <!-- SLIDE 8: STRATEGI DAKWAH 1 - PERDAGANGAN & MERANGKUL KASTA BAWAH -->
+    <div class="slide-card p-6 md:p-10 flex flex-col justify-between" id="slide-8">
+      <div class="geo-shape-1"></div>
+
+      <div class="relative z-10 text-white">
+        <div class="flex items-center space-x-3 mb-2">
+          <div class="w-3 h-8 bg-brand-accent rounded-full"></div>
+          <h2 class="text-2xl sm:text-3xl font-bold">Strategi 1: Perdagangan & Egaliter</h2>
+        </div>
+        <p class="text-brand-sky text-sm">Merangkul Rakyat Jelata dengan Keadilan Ekonomi.</p>
+      </div>
+
+      <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 my-auto">
+        <div class="animate-item delay-1 bg-white p-6 rounded-2xl shadow-lg border border-slate-100">
+          <div class="w-12 h-12 bg-blue-100 text-brand-primary rounded-xl flex items-center justify-center text-xl font-bold mb-3">
+            <i class="fa-solid fa-store"></i>
+          </div>
+          <h3 class="font-bold text-brand-navy text-base mb-2">Membuka Warung / Toko Murah</h3>
+          <p class="text-xs text-slate-600 leading-relaxed mb-3">
+            Sunan Gresik membuka toko di tempat terbuka di Desa Romo. Beliau menjual kebutuhan pokok dengan harga yang sangat terjangkau dan jujur tanpa memeras keuntungan.
+          </p>
+          <span class="text-[11px] font-semibold text-brand-primary bg-brand-sky px-3 py-1 rounded-full">Prinsip Kejujuran</span>
+        </div>
+
+        <div class="animate-item delay-2 bg-white p-6 rounded-2xl shadow-lg border border-slate-100">
+          <div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-xl flex items-center justify-center text-xl font-bold mb-3">
+            <i class="fa-solid fa-hand-holding-heart"></i>
+          </div>
+          <h3 class="font-bold text-brand-navy text-base mb-2">Penghapusan Sekat Kasta (Egaliter)</h3>
+          <p class="text-xs text-slate-600 leading-relaxed mb-3">
+            Di mata Sunan Gresik, kasta rendah (Sudra/Paria) diperlakukan sama derajatnya dengan bangsawan. Beliau mengajarkan bahwa kemuliaan hanya diukur dari <span class="word-click" onclick="openWordModal('Taqwa')">Taqwa</span>.
+          </p>
+          <span class="text-[11px] font-semibold text-rose-600 bg-rose-50 px-3 py-1 rounded-full">Kurikulum Berbasis Cinta</span>
+        </div>
+      </div>
+
+      <div class="relative z-10 bg-brand-navy/80 text-white p-4 rounded-2xl text-xs flex justify-between items-center backdrop-blur-sm">
+        <span><i class="fa-solid fa-check-circle text-emerald-400 mr-2"></i> Hasil: Rakyat menyukai keterbukaan dan rasa hormat yang ditunjukkan beliau.</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 9: STRATEGI DAKWAH 2 - PENGOBATAN GRATIS & KEMANUSIAAN -->
+    <div class="slide-card p-6 md:p-10 flex flex-col justify-between" id="slide-9">
+      <div class="geo-shape-2 opacity-30"></div>
+
+      <div class="relative z-10">
+        <div class="flex items-center space-x-3 mb-2">
+          <div class="w-3 h-8 bg-emerald-500 rounded-full"></div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-brand-navy">Strategi 2: Pengobatan Gratis</h2>
+        </div>
+        <p class="text-slate-600 text-sm">Wujud Nyata Pelayanan Kemanusiaan Tanpa Syarat.</p>
+      </div>
+
+      <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center my-auto">
+        <div class="lg:col-span-8 space-y-4">
+          <div class="animate-item delay-1 bg-emerald-50 border border-emerald-200 p-5 rounded-2xl">
+            <h3 class="font-bold text-emerald-900 text-sm mb-1"><i class="fa-solid fa-kit-medical mr-2"></i> Tabib yang Dermawan</h3>
+            <p class="text-xs text-emerald-800 leading-relaxed">
+              Sunan Gresik memiliki keahlian dalam racikan obat-obatan herbal alami. Beliau menyembuhkan warga yang sakit secara <strong>GRATIS</strong> tanpa memungut biaya sepeser pun.
+            </p>
+          </div>
+
+          <div class="animate-item delay-2 bg-slate-50 border border-slate-200 p-5 rounded-2xl">
+            <h3 class="font-bold text-brand-navy text-sm mb-1"><i class="fa-solid fa-heart-circle-check mr-2"></i> Touch of Love (Sentuhan Kasih)</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Beliau tidak pernah bertanya apa agama pasiennya sebelum mengobati. Cinta kasih mendahului doktrin agama, sehingga masyarakat tersentuh oleh kebaikan Islam.
+            </p>
+          </div>
+        </div>
+
+        <div class="lg:col-span-4 animate-item delay-3 bg-gradient-to-b from-emerald-600 to-teal-800 text-white p-6 rounded-3xl text-center shadow-lg">
+          <i class="fa-solid fa-stethoscope text-5xl mb-3 text-emerald-200"></i>
+          <h4 class="font-bold text-lg">Nilai Karakter</h4>
+          <p class="text-xs text-emerald-100 mt-2">
+            "Menolong sesama manusia adalah bentuk perwujudan keimanan yang paling nyata."
+          </p>
+        </div>
+      </div>
+
+      <div class="relative z-10 text-xs text-slate-500">
+        Model dakwah ini menciptakan kepercayaan (trust) yang sangat kuat di masyarakat pesisir.
+      </div>
+    </div>
+
+    <!-- SLIDE 10: STRATEGI DAKWAH 3 - PERTANIAN & KETAHANAN PANGAN -->
+    <div class="slide-card p-6 md:p-10 flex flex-col justify-between" id="slide-10">
+      <div class="geo-shape-1"></div>
+
+      <div class="relative z-10 text-white">
+        <div class="flex items-center space-x-3 mb-2">
+          <div class="w-3 h-8 bg-amber-400 rounded-full"></div>
+          <h2 class="text-2xl sm:text-3xl font-bold">Strategi 3: Pertanian & Irigasi</h2>
+        </div>
+        <p class="text-brand-sky text-sm">Inovasi Teknologi Pangan Berbasis Pemberdayaan.</p>
+      </div>
+
+      <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-5 my-auto">
+        <div class="animate-item delay-1 bg-white p-5 rounded-2xl shadow-md text-slate-800">
+          <div class="text-amber-500 text-2xl font-bold mb-2"><i class="fa-solid fa-wheat-awn"></i></div>
+          <h3 class="font-bold text-brand-navy mb-2">Teknik Irigasi Modern</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Mengajarkan cara mengolah lahan tandus menjadi subur dengan sistem pengairan yang efisien.
+          </p>
+        </div>
+
+        <div class="animate-item delay-2 bg-white p-5 rounded-2xl shadow-md text-slate-800">
+          <div class="text-amber-500 text-2xl font-bold mb-2"><i class="fa-solid fa-people-roof"></i></div>
+          <h3 class="font-bold text-brand-navy mb-2">Bimbingan Petani Jelata</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Mendampingi rakyat kecil agar memiliki kemandirian pangan dan tidak terlilit utang pada tuan tanah.
+          </p>
+        </div>
+
+        <div class="animate-item delay-3 bg-white p-5 rounded-2xl shadow-md text-slate-800">
+          <div class="text-amber-500 text-2xl font-bold mb-2"><i class="fa-solid fa-lightbulb"></i></div>
+          <h3 class="font-bold text-brand-navy mb-2">Nilai Tathawwur</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Sesuai prinsip <span class="word-click" onclick="openWordModal('Tathawwur')">Tathawwur wa Ibtikar</span> (dinamis & inovatif) dalam Pelajar Rahmatan Lil 'Alamin.
+          </p>
+        </div>
+      </div>
+
+      <div class="relative z-10 bg-white/10 text-white p-3 rounded-xl text-xs text-center border border-white/20">
+        Sunan Gresik tidak hanya membangun menara ibadah, tetapi juga membangun kesejahteraan perut rakyat.
+      </div>
+    </div>
+
+    <!-- SLIDE 11: HUBUNGAN DIPLOMASI DENGAN ISTANA MAJAPAHIT -->
+    <div class="slide-card p-6 md:p-10 flex flex-col justify-between" id="slide-11">
+      <div class="geo-shape-2 opacity-20"></div>
+
+      <div class="relative z-10">
+        <div class="flex items-center space-x-3 mb-2">
+          <div class="w-3 h-8 bg-purple-600 rounded-full"></div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-brand-navy">Diplomasi Dengan Istana Majapahit</h2>
+        </div>
+        <p class="text-slate-600 text-sm">Menghormati Penguasa Lokal Tanpa Menimbulkan Konflik.</p>
+      </div>
+
+      <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center my-auto">
+        <div class="lg:col-span-7 space-y-4">
+          <div class="animate-item delay-1 bg-slate-50 p-5 rounded-2xl border border-slate-200">
+            <h3 class="font-bold text-brand-navy text-sm mb-2"><i class="fa-solid fa-crown text-purple-600 mr-2"></i> Pertemuan Raja Brawijaya V</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Sunan Gresik bersilaturahmi langsung ke istana Majapahit. Beliau diterima dengan sangat baik oleh Raja Brawijaya V karena tutur katanya yang penuh keadaban (<span class="word-click" onclick="openWordModal('Taaddub')">Ta'addub</span>).
+            </p>
+          </div>
+
+          <div class="animate-item delay-2 bg-slate-50 p-5 rounded-2xl border border-slate-200">
+            <h3 class="font-bold text-brand-navy text-sm mb-2"><i class="fa-solid fa-map-location-dot text-brand-primary mr-2"></i> Hadiah Tanah Desa Gapura</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Meskipun Raja Brawijaya belum masuk Islam, Raja memberikan sebidang tanah di Desa Gapura sebagai penghargaan atas kontribusi sosial Sunan Gresik.
+            </p>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 animate-item delay-3 bg-purple-900 text-white p-6 rounded-3xl shadow-xl text-center">
+          <i class="fa-solid fa-landmark-flag text-5xl mb-3 text-purple-300"></i>
+          <h4 class="font-bold text-base">Pelajaran Diplomasi</h4>
+          <p class="text-xs text-purple-200 mt-2">
+            "Berdakwah di lingkungan penguasa dilakukan dengan sopan santun, menghargai kedaulatan, dan menjaga keamanan negara."
+          </p>
+        </div>
+      </div>
+
+      <div class="relative z-10 text-xs text-slate-500">
+        Keadaban politis Sunan Gresik menjadi pondasi kokoh bagi generasi Walisongo berikutnya.
+      </div>
+    </div>
+
+    <!-- SLIDE 12: NILAI KETELADANAN & MODERASI BERAGAMA -->
+    <div class="slide-card p-6 md:p-10 flex flex-col justify-between" id="slide-12">
+      <div class="geo-shape-1"></div>
+
+      <div class="relative z-10 text-white">
+        <div class="flex items-center space-x-3 mb-2">
+          <div class="w-3 h-8 bg-brand-accent rounded-full"></div>
+          <h2 class="text-2xl sm:text-3xl font-bold">4 Pillars Moderasi Beragama</h2>
+        </div>
+        <p class="text-brand-sky text-sm">Internalisasi Karakter Pelajar Rahmatan Lil 'Alamin dalam Kehidupan Modern.</p>
+      </div>
+
+      <div class="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-auto">
+        <!-- Pillar 1 -->
+        <div class="animate-item delay-1 bg-white text-slate-800 p-5 rounded-2xl shadow-lg border-t-4 border-blue-500">
+          <h3 class="font-bold text-brand-navy mb-1">1. Ta'addub</h3>
+          <p class="text-[11px] text-slate-500 mb-2">Keadaban & Sopan Santun</p>
+          <p class="text-xs text-slate-600">Selalu bersikap santun kepada guru, orang tua, dan teman tanpa membedakan status.</p>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div class="animate-item delay-2 bg-white text-slate-800 p-5 rounded-2xl shadow-lg border-t-4 border-emerald-500">
+          <h3 class="font-bold text-brand-navy mb-1">2. Tawassuth</h3>
+          <p class="text-[11px] text-slate-500 mb-2">Moderat & Seimbang</p>
+          <p class="text-xs text-slate-600">Tidak ekstrem kiri maupun kanan dalam berpendapat dan menghargai keragaman.</p>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div class="animate-item delay-3 bg-white text-slate-800 p-5 rounded-2xl shadow-lg border-t-4 border-amber-500">
+          <h3 class="font-bold text-brand-navy mb-1">3. Tasamuh</h3>
+          <p class="text-[11px] text-slate-500 mb-2">Toleransi Tinggi</p>
+          <p class="text-xs text-slate-600">Menghormati tetangga dan teman yang berbeda suku, agama, serta tradisi.</p>
+        </div>
+
+        <!-- Pillar 4 -->
+        <div class="animate-item delay-4 bg-white text-slate-800 p-5 rounded-2xl shadow-lg border-t-4 border-purple-500">
+          <h3 class="font-bold text-brand-navy mb-1">4. Tathawwur</h3>
+          <p class="text-[11px] text-slate-500 mb-2">Dinamis & Inovatif</p>
+          <p class="text-xs text-slate-600">Kreatif memanfaatkan media digital untuk menyebarkan kebaikan dan belajar.</p>
+        </div>
+      </div>
+
+      <div class="relative z-10 bg-white/10 text-white p-3 rounded-xl text-xs text-center border border-white/20">
+        Nilai-nilai ini yang membuat Islam berkembang pesat menjadi agama mayoritas di Nusantara.
+      </div>
+    </div>
+
+    <!-- SLIDE 13: ACTIVITY HUB / DISKUSI KELOMPOK -->
+    <div class="slide-card p-6 md:p-10 flex flex-col justify-between" id="slide-13">
+      <div class="geo-shape-2 opacity-20"></div>
+
+      <div class="relative z-10">
+        <div class="flex items-center space-x-3 mb-2">
+          <div class="w-3 h-8 bg-rose-500 rounded-full"></div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-brand-navy">Activity Hub: Diskusi Kelompok</h2>
+        </div>
+        <p class="text-slate-600 text-sm">Metode Market Place of Activity & Gallery Walk.</p>
+      </div>
+
+      <div class="relative z-10 bg-white p-6 rounded-3xl shadow-xl border border-slate-200 my-auto space-y-5">
+        <div class="flex items-center space-x-3">
+          <div class="px-3 py-1 bg-rose-100 text-rose-700 font-bold text-xs rounded-lg">STUDI KASUS AKTUAL</div>
+          <h3 class="font-bold text-brand-navy text-base">Kontekstualisasi Dakwah Sunan Gresik di Era Digital</h3>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+            <h4 class="font-bold text-brand-primary mb-1">Kelompok 1 & 2</h4>
+            <p class="text-slate-600">Bagaimana cara menerapkan strategi pengobatan gratis Sunan Gresik dalam bentuk aksi sosial siswa MTs saat ini?</p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+            <h4 class="font-bold text-brand-primary mb-1">Kelompok 3 & 4</h4>
+            <p class="text-slate-600">Bagaimana memanfaatkan media sosial (TikTok/IG) untuk berdakwah dengan prinsip <span class="word-click" onclick="openWordModal('Hikmah')">Hikmah</span> tanpa ujaran kebencian?</p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+            <h4 class="font-bold text-brand-primary mb-1">Kelompok 5 & 6</h4>
+            <p class="text-slate-600">Buatlah infografis/poster ringkas tentang biografi Sunan Gresik untuk dikunjungi kelompok lain.</p>
+          </div>
+        </div>
+
+        <div class="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900 flex items-center justify-between">
+          <span><i class="fa-solid fa-clock mr-2"></i> Waktu Diskusi & Presentasi: 20 Menit</span>
+          <span class="font-bold">Model: Gallery Walk</span>
+        </div>
+      </div>
+
+      <div class="relative z-10 text-xs text-slate-500 text-center">
+        Setiap kelompok menunjuk 1 penjaga stan dan anggota lainnya berkunjung ke stan kelompok lain.
+      </div>
+    </div>
+
+    <!-- SLIDE 14: KUIS INTERAKTIF -->
+    <div class="slide-card p-6 md:p-10 flex flex-col justify-between" id="slide-14">
+      <div class="geo-shape-1"></div>
+
+      <div class="relative z-10 text-white">
+        <div class="flex items-center space-x-3 mb-2">
+          <div class="w-3 h-8 bg-amber-400 rounded-full"></div>
+          <h2 class="text-2xl sm:text-3xl font-bold">Kuis Interaktif Evaluasi</h2>
+        </div>
+        <p class="text-brand-sky text-sm">Uji pemahamanmu tentang materi Pertemuan 1!</p>
+      </div>
+
+      <!-- Interactive Quiz Container Widget -->
+      <div class="relative z-10 bg-white/95 text-slate-800 p-6 md:p-8 rounded-3xl shadow-2xl my-auto max-w-3xl mx-auto w-full">
+        
+        <!-- Quiz Progress Header -->
+        <div class="flex justify-between items-center mb-4 text-xs font-semibold text-slate-500 border-b border-slate-100 pb-2">
+          <span id="quiz-question-num">Pertanyaan 1 dari 3</span>
+          <span id="quiz-score-display" class="text-brand-primary font-bold">Skor: 0</span>
+        </div>
+
+        <!-- Question Title -->
+        <h3 id="quiz-question-title" class="font-bold text-brand-navy text-base md:text-lg mb-4">
+          Loading Pertanyaan...
+        </h3>
+
+        <!-- Options Container -->
+        <div id="quiz-options-container" class="space-y-3">
+          <!-- Dynamically inserted by JS -->
+        </div>
+
+        <!-- Feedback Alert Box -->
+        <div id="quiz-feedback" class="mt-4 p-3 rounded-xl text-xs font-semibold hidden">
+          <!-- Correct/Incorrect feedback text -->
+        </div>
+
+        <!-- Next Quiz Button -->
+        <div class="mt-4 text-right">
+          <button id="quiz-next-btn" onclick="nextQuizQuestion()" class="px-6 py-2.5 bg-brand-navy hover:bg-brand-primary text-white text-xs font-bold rounded-xl transition shadow-md hidden">
+            Pertanyaan Berikutnya <i class="fa-solid fa-arrow-right ml-1"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="relative z-10 text-xs text-brand-sky text-center">
+        Kuis ini bertujuan mengukur pemahaman kognitif & internalisasi nilai karakter.
+      </div>
+    </div>
+
+    <!-- SLIDE 15: PENUTUP, REFLEKSI CINTA & DOA -->
+    <div class="slide-card p-6 md:p-10 flex flex-col justify-between" id="slide-15">
+      <div class="geo-shape-2 opacity-30"></div>
+
+      <div class="relative z-10">
+        <div class="flex items-center space-x-3 mb-2">
+          <div class="w-3 h-8 bg-emerald-500 rounded-full"></div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-brand-navy">Refleksi Cinta & Penutup</h2>
+        </div>
+        <p class="text-slate-600 text-sm">Rangkuman Nilai & Doa Penutup Pembelajaran.</p>
+      </div>
+
+      <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 my-auto">
+        <!-- Summary Box -->
+        <div class="animate-item delay-1 bg-slate-50 p-6 rounded-2xl border border-slate-200">
+          <h3 class="font-bold text-brand-navy text-base mb-3"><i class="fa-solid fa-bookmark text-brand-primary mr-2"></i> Rangkuman Pertemuan 1</h3>
+          <ul class="text-xs text-slate-600 space-y-2 list-disc list-inside">
+            <li>Sunan Gresik mendarat di Leran (1392 M) sebagai pelopor Walisongo.</li>
+            <li>Dakwah dilakukan melalui jalur <strong>perdagangan jujur</strong>, <strong>pengobatan gratis</strong>, dan <strong>teknik irigasi pertanian</strong>.</li>
+            <li>Prinsip utama: Mengedepankan kasih sayang, menghapus sekat kasta, serta santun kepada penguasa Majapahit.</li>
+          </ul>
+        </div>
+
+        <!-- Closing Prayer Card -->
+        <div class="animate-item delay-2 bg-gradient-to-br from-brand-navy to-brand-primary text-white p-6 rounded-2xl shadow-xl space-y-3 text-center">
+          <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto text-xl text-yellow-300">
+            <i class="fa-solid fa-hands-praying"></i>
+          </div>
+          <h4 class="font-bold text-base">Doa Penutup Majelis</h4>
+          <p class="font-arabic text-xl leading-relaxed text-amber-200">
+            سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، أَشْهَدُ أَنْ لاَ إِلَهَ إِلاَّ أَنْتَ، أَسْتَغْفِرُكَ وَأَتُوبُ إِلَيْكَ
+          </p>
+          <p class="text-[11px] text-brand-sky italic">
+            "Maha Suci Engkau ya Allah, dan dengan memuji-Mu, aku bersaksi bahwa tidak ada tuhan selain Engkau, aku memohon ampun dan bertaubat kepada-Mu."
+          </p>
+        </div>
+      </div>
+
+      <div class="relative z-10 flex flex-wrap justify-between items-center border-t border-slate-200 pt-4 text-xs text-slate-500">
+        <div>Sampai Jumpa di Pertemuan 2: <strong>Sunan Ampel & Kaderisasi Dakwah!</strong></div>
+        <button onclick="goToSlide(0)" class="px-4 py-2 bg-brand-primary text-white rounded-xl font-bold hover:bg-brand-navy transition">
+          <i class="fa-solid fa-rotate-left mr-1"></i> Ulangi Slide dari Awal
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- BOTTOM CONTROL NAVIGATION BAR -->
+  <footer class="w-full max-w-7xl mx-auto bg-brand-navy/90 backdrop-blur-md text-white px-5 py-3 rounded-2xl shadow-lg border border-white/10 flex items-center justify-between z-50">
+    <!-- Prev Button -->
+    <button onclick="prevSlide()" class="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-xl text-xs font-bold transition flex items-center space-x-2">
+      <i class="fa-solid fa-chevron-left"></i>
+      <span class="hidden sm:inline">Sebelumnya</span>
+    </button>
+
+    <!-- Progress Indicator Bar -->
+    <div class="flex-1 mx-4 max-w-md">
+      <div class="w-full bg-white/10 rounded-full h-2 overflow-hidden">
+        <div id="progress-bar" class="bg-gradient-to-r from-brand-accent to-blue-400 h-full w-[6.66%] transition-all duration-300"></div>
+      </div>
+    </div>
+
+    <!-- Next Button -->
+    <button onclick="nextSlide()" class="px-5 py-2 bg-brand-accent hover:bg-blue-400 text-brand-dark rounded-xl text-xs font-bold transition flex items-center space-x-2 shadow-md">
+      <span class="hidden sm:inline">Selanjutnya</span>
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+  </footer>
+
+  <!-- SLIDE OVERVIEW DRAWER / MODAL -->
+  <div id="slide-overview-modal" class="fixed inset-0 z-50 glass-modal flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-4xl w-full p-6 shadow-2xl border border-slate-200 flex flex-col max-h-[85vh]">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-3 mb-4">
+        <h3 class="text-lg font-bold text-brand-navy"><i class="fa-solid fa-table-cells mr-2 text-brand-primary"></i> Navigasi 15 Slide Pembelajaran</h3>
+        <button onclick="toggleSlideOverview()" class="text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+      </div>
+      
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 overflow-y-auto p-1 flex-1" id="overview-grid">
+        <!-- Dynamically Generated Thumbnail Grid -->
+      </div>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE WORD EXPLANATION MODAL (DICTIONARY SYSTEM) -->
+  <div id="word-modal" class="fixed inset-0 z-50 glass-modal flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 transform transition-all scale-95 opacity-0" id="word-modal-card">
+      <div class="flex justify-between items-start border-b border-slate-100 pb-3 mb-3">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-brand-sky text-brand-primary flex items-center justify-center font-bold text-lg">
+            <i class="fa-solid fa-book-bookmark"></i>
+          </div>
+          <div>
+            <span class="text-[10px] uppercase font-bold tracking-wider text-brand-accent">Glosarium Interaktif</span>
+            <h3 id="modal-word-title" class="text-lg font-extrabold text-brand-navy">Judul Kata</h3>
+          </div>
+        </div>
+        <button onclick="closeWordModal()" class="text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+      </div>
+
+      <div class="space-y-3 py-2">
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+          <h4 class="text-xs font-bold text-slate-500 uppercase mb-1">Pengertian & Konteks Sejarah:</h4>
+          <p id="modal-word-desc" class="text-xs md:text-sm text-slate-700 leading-relaxed">
+            Deskripsi lengkap...
+          </p>
+        </div>
+
+        <div class="bg-rose-50 p-3 rounded-2xl border border-rose-100 flex items-start space-x-3">
+          <i class="fa-solid fa-heart text-rose-500 text-base mt-0.5"></i>
+          <div>
+            <h4 class="text-[11px] font-bold text-rose-900">Refleksi Kurikulum Berbasis Cinta:</h4>
+            <p id="modal-word-love" class="text-xs text-rose-800">
+              Nilai cinta kasih yang dapat diteladani...
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4 text-right">
+        <button onclick="closeWordModal()" class="px-5 py-2 bg-brand-navy text-white text-xs font-bold rounded-xl hover:bg-brand-primary transition">
+          Tutup Glosarium
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC & INTERACTION ENGINE -->
+  <script>
+    // State Variables
+    let currentSlide = 0;
+    const totalSlides = 15;
+
+    // Interactive Word Dictionary Data Structure
+    const wordDictionary = {
+      'Sunan Gresik': {
+        title: 'Sunan Gresik (Maulana Malik Ibrahim)',
+        desc: 'Wali tertua dalam jajaran Walisongo yang menyebarkan Islam di wilayah pesisir Jawa Timur (Gresik) pada akhir abad ke-14 M. Beliau menggunakan pendekatan ekonomi, perdagangan, dan kesehatan.',
+        love: 'Meneladani sifat beliau yang penuh perhatian kepada rakyat miskin tanpa membedakan latar belakang keyakinan.'
+      },
+      'Maulana Malik Ibrahim': {
+        title: 'Maulana Malik Ibrahim',
+        desc: 'Nama asli Sunan Gresik. Berasal dari Kashan (Persia) dan datang ke tanah Jawa pada tahun 1392 M bersama rombongannya untuk menyiarkan Islam secara damai.',
+        love: 'Keberanian merantau jauh untuk menebarkan benih kasih sayang dan ilmunya bagi kebaikan umat manusia.'
+      },
+      'Walisongo': {
+        title: 'Walisongo (Sembilan Wali)',
+        desc: 'Majelis sembilan ulama penyebar Islam di Pulau Jawa pada abad ke-14 hingga ke-16 M. Mereka memadukan ajaran Islam dengan kearifan lokal Nusantara secara ramah dan inklusif.',
+        love: 'Menjadi simbol keberhasilan dakwah yang berlandaskan kedamaian, penghormatan budaya, dan kebersamaan.'
+      },
+      'Strategi Dakwah': {
+        title: 'Strategi Dakwah Kultural & Sosial',
+        desc: 'Pendekatan penyiaran agama yang tidak menggunakan kekerasan militer, melainkan melalui jalan perdagangan jujur, pengobatan gratis, seni budaya, serta perbaikan sistem irigasi.',
+        love: 'Mengutamakan aksi nyata memberi bantuan kemanusiaan daripada sekadar perdebatan kata-kata.'
+      },
+      'Taaddub': {
+        title: "Ta'addub (Keadaban / Sopan Santun)",
+        desc: 'Salah satu nilai utama Pelajar Rahmatan Lil \'Alamin yang menekankan pentingnya berperilaku mulia, beretika tinggi, dan menghormati sesama manusia.',
+        love: 'Mencintai sesama dengan cara senantiasa menjaga lisan, pikiran, dan perbuatan agar tidak menyakiti orang lain.'
+      },
+      'Tawassuth': {
+        title: 'Tawassuth (Moderat / Seimbang)',
+        desc: 'Sikap berada di tengah-tengah (berimbang), tidak bersikap ekstrem dalam beragama dan tidak mudah mengafirkan orang lain.',
+        love: 'Menjaga harmoni kedamaian dengan sikap tenggang rasa dan keterbukaan jiwa.'
+      },
+      'Tasamuh': {
+        title: 'Tasamuh (Toleransi)',
+        desc: 'Sikap saling menghargai dan menghormati perbedaan keyakinan, ras, kasta, dan budaya di tengah masyarakat plural.',
+        love: 'Memeluk keanekaragaman sebagai wujud keindahan ciptaan Tuhan yang harus dirawat dengan rasa cinta.'
+      },
+      'Tathawwur': {
+        title: 'Tathawwur wa Ibtikar (Dinamis & Inovatif)',
+        desc: 'Semangat untuk terus berkembang, terbuka pada kemajuan zaman, dan melahirkan inovasi baru bagi kesejahteraan masyarakat.',
+        love: 'Menggunakan ilmu pengetahuan modern untuk mempermudah dan membahagiakan kehidupan sesama.'
+      },
+      'Ahlul Bait': {
+        title: 'Ahlul Bait',
+        desc: 'Garis keturunan suci keluarga Nabi Muhammad SAW melalui Sayyidah Fatimah Az-Zahra dan Sayyidina Ali bin Abi Thalib.',
+        love: 'Mengikuti jejak perangai luhur Nabi Muhammad SAW yang penuh kelembutan dan kasih sayang.'
+      },
+      'Hikmah': {
+        title: 'Al-Hikmah (Kebijaksanaan)',
+        desc: 'Metode dakwah menggunakan kearifan, ilmu pengetahuan yang tepat sasaran, dan pemahaman mendalam atas kondisi masyarakat yang dihadapi.',
+        love: 'Menyampaikan kebenaran dengan cara yang paling menyejukkan hati pendengarnya.'
+      },
+      'Taqwa': {
+        title: 'Taqwa',
+        desc: 'Menjalankan segala perintah Allah SWT dan menjauhi larangan-Nya. Dalam ajaran Walisongo, taqwa adalah satu-satunya ukuran kemuliaan manusia, bukan pangkat/kasta.',
+        love: 'Membebaskan manusia dari diskriminasi sosial menuju kesetaraan derajat yang penuh cinta.'
+      }
+    };
+
+    // Interactive Quiz Data
+    const quizData = [
+      {
+        question: "Pada tahun berapakah Maulana Malik Ibrahim (Sunan Gresik) pertama kali mendarat di Desa Leran, Gresik?",
+        options: ["1292 M", "1392 M", "1492 M", "1592 M"],
+        correct: 1,
+        explanation: "Sunan Gresik mendarat di Desa Leran, Gresik pada tahun 1392 M (abad ke-14)."
+      },
+      {
+        question: "Bagaimana strategi Sunan Gresik dalam merangkul masyarakat kasta bawah di pesisir Gresik?",
+        options: [
+          "Memaksa mereka membayar pajak tinggi",
+          "Membuka warung kebutuhan pokok murah & memberikan pengobatan gratis",
+          "Menjauhi mereka dan hanya mendekati kasta bangsawan",
+          "Mengubah tradisi secara instan dan keras"
+        ],
+        correct: 1,
+        explanation: "Beliau membuka toko berharga jujur, memberikan pelayanan kesehatan gratis, dan mengajarkan irigasi pertanian."
+      },
+      {
+        question: "Nilai Moderasi Beragama yang bermakna 'Toleransi & Saling Menghargai Perbedaan' adalah...",
+        options: ["Ta'addub", "Tawassuth", "Tasamuh", "Tathawwur"],
+        correct: 2,
+        explanation: "Tasamuh berarti toleransi, yaitu menghargai keragaman keyakinan dan kearifan lokal."
+      }
+    ];
+
+    let currentQuizIndex = 0;
+    let quizScore = 0;
+
+    // Slide Controller Functions
+    function updateSlideVisibility() {
+      const slides = document.querySelectorAll('.slide-card');
+      slides.forEach((slide, index) => {
+        if (index === currentSlide) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+
+      // Update Top Number Indicator
+      document.getElementById('current-slide-num').innerText = currentSlide + 1;
+
+      // Update Progress Bar
+      const progressPercent = ((currentSlide + 1) / totalSlides) * 100;
+      document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        updateSlideVisibility();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlideVisibility();
+      }
+    }
+
+    function goToSlide(index) {
+      if (index >= 0 && index < totalSlides) {
+        currentSlide = index;
+        updateSlideVisibility();
+        closeSlideOverview();
+      }
+    }
+
+    // Slide Overview Drawer Logic
+    function toggleSlideOverview() {
+      const modal = document.getElementById('slide-overview-modal');
+      if (modal.classList.contains('hidden')) {
+        renderOverviewGrid();
+        modal.classList.remove('hidden');
+      } else {
+        modal.classList.add('hidden');
+      }
+    }
+
+    function closeSlideOverview() {
+      document.getElementById('slide-overview-modal').classList.add('hidden');
+    }
+
+    function renderOverviewGrid() {
+      const grid = document.getElementById('overview-grid');
+      grid.innerHTML = '';
+      
+      const slideTitles = [
+        "1. Cover Modul", "2. Identitas & Values", "3. Aperseptasi Pemantik", 
+        "4. Capaian & Tujuan", "5. Konteks Abad 14", "6. QS. An-Nahl: 125", 
+        "7. Biografi Sunan Gresik", "8. Strategi 1: Dagang", "9. Strategi 2: Obat Gratis", 
+        "10. Strategi 3: Tani", "11. Diplomasi Majapahit", "12. 4 Pilar Moderasi", 
+        "13. Activity Hub", "14. Kuis Interaktif", "15. Refleksi & Doa"
+      ];
+
+      slideTitles.forEach((title, i) => {
+        const item = document.createElement('div');
+        item.className = `p-3 rounded-xl border text-xs cursor-pointer transition flex flex-col justify-between font-semibold ${
+          i === currentSlide 
+            ? 'bg-brand-navy text-white border-brand-accent shadow-md' 
+            : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+        }`;
+        item.onclick = () => goToSlide(i);
+        item.innerHTML = `
+          <span>Slide ${i + 1}</span>
+          <span class="text-[11px] font-normal truncate mt-1 opacity-90">${title}</span>
+        `;
+        grid.appendChild(item);
+      });
+    }
+
+    // Word Pop-up Modal Logic
+    function openWordModal(wordKey) {
+      const modal = document.getElementById('word-modal');
+      const modalCard = document.getElementById('word-modal-card');
+      const data = wordDictionary[wordKey];
+
+      if (data) {
+        document.getElementById('modal-word-title').innerText = data.title;
+        document.getElementById('modal-word-desc').innerText = data.desc;
+        document.getElementById('modal-word-love').innerText = data.love;
+
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+          modalCard.classList.remove('scale-95', 'opacity-0');
+          modalCard.classList.add('scale-100', 'opacity-100');
+        }, 10);
+      }
+    }
+
+    function closeWordModal() {
+      const modal = document.getElementById('word-modal');
+      const modalCard = document.getElementById('word-modal-card');
+      modalCard.classList.remove('scale-100', 'opacity-100');
+      modalCard.classList.add('scale-95', 'opacity-0');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 200);
+    }
+
+    // Quiz Widget Engine
+    function loadQuizQuestion() {
+      const q = quizData[currentQuizIndex];
+      document.getElementById('quiz-question-num').innerText = `Pertanyaan ${currentQuizIndex + 1} dari ${quizData.length}`;
+      document.getElementById('quiz-question-title').innerText = q.question;
+      
+      const container = document.getElementById('quiz-options-container');
+      container.innerHTML = '';
+
+      const feedback = document.getElementById('quiz-feedback');
+      feedback.classList.add('hidden');
+      document.getElementById('quiz-next-btn').classList.add('hidden');
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = "w-full text-left p-3.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 transition flex items-center justify-between";
+        btn.innerHTML = `
+          <span>${String.fromCharCode(65 + idx)}. ${opt}</span>
+          <i class="fa-regular fa-circle text-slate-300"></i>
+        `;
+        btn.onclick = () => selectQuizOption(idx, btn);
+        container.appendChild(btn);
+      });
+    }
+
+    function selectQuizOption(selectedIdx, btnElement) {
+      const q = quizData[currentQuizIndex];
+      const container = document.getElementById('quiz-options-container');
+      const buttons = container.querySelectorAll('button');
+      const feedback = document.getElementById('quiz-feedback');
+
+      // Disable all buttons after selection
+      buttons.forEach(b => b.onclick = null);
+
+      if (selectedIdx === q.correct) {
+        quizScore += 100 / quizData.length;
+        btnElement.classList.remove('bg-slate-50', 'border-slate-200');
+        btnElement.classList.add('bg-emerald-100', 'border-emerald-500', 'text-emerald-900');
+        btnElement.querySelector('i').className = "fa-solid fa-circle-check text-emerald-600";
+
+        feedback.className = "mt-4 p-3 rounded-xl text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200";
+        feedback.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> <strong>Benar!</strong> ${q.explanation}`;
+      } else {
+        btnElement.classList.remove('bg-slate-50', 'border-slate-200');
+        btnElement.classList.add('bg-rose-100', 'border-rose-500', 'text-rose-900');
+        btnElement.querySelector('i').className = "fa-solid fa-circle-xmark text-rose-600";
+
+        // Highlight correct answer
+        buttons[q.correct].classList.remove('bg-slate-50');
+        buttons[q.correct].classList.add('bg-emerald-50', 'border-emerald-300', 'text-emerald-800');
+
+        feedback.className = "mt-4 p-3 rounded-xl text-xs font-semibold bg-rose-50 text-rose-800 border border-rose-200";
+        feedback.innerHTML = `<i class="fa-solid fa-circle-exclamation mr-2"></i> <strong>Kurang Tepat.</strong> ${q.explanation}`;
+      }
+
+      feedback.classList.remove('hidden');
+      document.getElementById('quiz-score-display').innerText = `Skor: ${Math.round(quizScore)}`;
+      document.getElementById('quiz-next-btn').classList.remove('hidden');
+    }
+
+    function nextQuizQuestion() {
+      if (currentQuizIndex < quizData.length - 1) {
+        currentQuizIndex++;
+        loadQuizQuestion();
+      } else {
+        // Quiz Complete State
+        const container = document.getElementById('quiz-options-container');
+        document.getElementById('quiz-question-title').innerText = "Selamat! Anda Telah Menyelesaikan Kuis.";
+        container.innerHTML = `
+          <div class="text-center p-6 bg-slate-50 rounded-2xl border border-slate-200">
+            <i class="fa-solid fa-trophy text-5xl text-amber-500 mb-3"></i>
+            <h4 class="text-xl font-bold text-brand-navy">Skor Akhir Anda: ${Math.round(quizScore)} / 100</h4>
+            <p class="text-xs text-slate-600 mt-2">Terus teladani keteladanan Sunan Gresik dalam kehidupan sehari-hari!</p>
+            <button onclick="resetQuiz()" class="mt-4 px-6 py-2.5 bg-brand-primary text-white text-xs font-bold rounded-xl hover:bg-brand-navy transition">
+              Coba Kuis Lagi
+            </button>
+          </div>
+        `;
+        document.getElementById('quiz-feedback').classList.add('hidden');
+        document.getElementById('quiz-next-btn').classList.add('hidden');
+      }
+    }
+
+    function resetQuiz() {
+      currentQuizIndex = 0;
+      quizScore = 0;
+      document.getElementById('quiz-score-display').innerText = `Skor: 0`;
+      loadQuizQuestion();
+    }
+
+    // Keyboard Navigation Handler
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'Space') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+      } else if (e.key === 'Escape') {
+        closeWordModal();
+        closeSlideOverview();
+      }
+    });
+
+    // Touch Swipe Navigation Handler
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      if (touchEndX < touchStartX - 50) {
+        nextSlide();
+      }
+      if (touchEndX > touchStartX + 50) {
+        prevSlide();
+      }
+    }
+
+    // Initialize Application
+    window.onload = function() {
+      updateSlideVisibility();
+      loadQuizQuestion();
+    };
+  </script>
+</body>
+</html>
